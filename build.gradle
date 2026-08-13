@@ -80,7 +80,8 @@ processResources
 jar {
     manifest {
         attributes(
-            'FMLCorePlugin': 'org.adrianvictor.healerbed.Main'
+            'FMLCorePlugin': 'org.adrianvictor.healerbed.CoreMod',
+            'FMLCorePluginContainsFMLMod': 'true'
         )
     }
 }
