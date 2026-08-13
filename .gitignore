@@ -1,0 +1,21 @@
+# Gradle
+.gradle/
+build/
+
+# ForgeGradle generated files
+eclipse/
+bin/
+
+# Minecraft runtime
+run/
+
+# Generated launchers
+*.launch
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db

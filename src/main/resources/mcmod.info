@@ -1,0 +1,16 @@
+[
+{
+  "modid": "healerbed",
+  "name": "HealerBed",
+  "description": "Heals and feeds you when sleeping.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://adrianvic.github.io",
+  "updateUrl": "",
+  "authorList": ["tenkuma"],
+  "credits": "The Forge and FML guys, for making this modloader. My sanity for touching ASM.",
+  "logoFile": "logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
