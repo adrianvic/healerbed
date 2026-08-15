@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import io.netty.handler.logging.LogLevel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,10 +29,14 @@ public class Main {
     private final Set<UUID> sleepingPlayers = new HashSet<UUID>();
     private MinecraftServer server;
     private static Main INSTANCE;
+    public static Logger logger = LogManager.getLogger(MODID);
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	Config.load(event.getSuggestedConfigurationFile());
+    	Main.logger.log(Level.INFO,
+    		    String.format("Loaded configuration, will: heal %s; feed: %s; require full sleep: %s.",
+    		        Config.healAmount, Config.feedAmount, Config.requireSleepUntilMorning));
     	INSTANCE = this;
     }
     
@@ -47,12 +56,16 @@ public class Main {
     	
     	if (player.worldObj.isRemote || Config.requireSleepUntilMorning) return;
     	
+    	Main.logger.info("Healing " + player.getName() + ".");
+    	
     	player.heal(Config.healAmount);
 		player.getFoodStats().addStats(Config.feedAmount, Config.saturationAmount);
     }
     
-    void onPlayerWoken(EntityPlayer player) {
+    public static void onPlayerWoken(EntityPlayer player) {
     	if (!Config.requireSleepUntilMorning) return;
+    	
+    	Main.logger.info("Healing " + player.getName() + ".");
     	
     	player.heal(Config.healAmount);
 		player.getFoodStats().addStats(Config.feedAmount, Config.saturationAmount);
